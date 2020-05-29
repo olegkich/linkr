@@ -1,57 +1,57 @@
 import React from 'react';
-import Form from 'muicss/lib/react/form';
-import Button from 'muicss/lib/react/button';
-import Input from 'muicss/lib/react/input';
+
 import './Main.css'
 import {Link} from "../Components/Link";
+import LinkForm from '../Components/LinkForm'
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            linkEntered: '',
-            links: []
-        }
+            links: [],
+        };
     }
 
-    handleInput = (e) => {
+    addLink = link => {
         this.setState({
-            linkEntered: e.target.value
+            links: [...this.state.links, link]
         })
-        console.log(this.state.linkEntered)
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
+    deleteLink = id => {
         this.setState({
-            links: [...this.state.links, this.state.linkEntered],
-            linkEntered: ''
+            links: this.state.links.filter(linkItem => linkItem.id !== id)
         })
-        console.log(this.state.links.toString())
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem('links', JSON.stringify(this.state.links))
+    }
+
+    componentDidMount() {
+        this.setState({
+            links: [...JSON.parse(localStorage.getItem('links'))]
+         })
     }
 
     render() {
-        let links = []
-        links = this.state.links
-
+    
         return ( 
             <div className='main'>
                 <div className='container'>
-                    <Form>
-                        <legend>
-                            <h2>list title</h2>
-                        </legend>
-                        <Input placeholder='enter your link'
-                        onChange={this.handleInput}
-                        value={this.state.linkEntered}/>
-                        <Button variant='raised' color='primary'
-                        onClick={this.handleSubmit}>Add Link</Button>
-                    </Form>
+
+                    <LinkForm listName={this.props.listName} listId={this.props.listId} addLink={this.addLink}/>
+
                     <div className='link-list'>
-                        {links.map(link => (
-                            <Link link={link}/>
+                        {this.state.links.map(linkItem => (
+                            <Link 
+                            link={linkItem.link}
+                            key={linkItem.id}
+                            listId={this.props.listId}
+                            onDelete={() => this.deleteLink(linkItem.id)}/>
                         ))}
                     </div>
+
                 </div>
             </div>
             

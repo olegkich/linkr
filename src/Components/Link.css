@@ -1,4 +1,10 @@
 .link {
+    position: relative;
     margin-bottom: 20px;
     font-size: 20px;
+}
+
+.btn-delete {
+    position: absolute;
+    right: 0;
 }
