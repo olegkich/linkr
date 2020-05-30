@@ -32,6 +32,7 @@ class Main extends React.Component {
         this.setState({
             links: [...JSON.parse(localStorage.getItem('links'))]
          })
+         console.log(this.state.links)
     }
 
     render() {
@@ -42,7 +43,7 @@ class Main extends React.Component {
 
                     <LinkForm listName={this.props.listName} listId={this.props.listId} addLink={this.addLink}/>
 
-                    <div className='link-list'>
+                    <div className='links'>
                         {this.state.links.map(linkItem => (
                             <Link 
                             link={linkItem.link}

@@ -11,3 +11,23 @@
     padding: 20px;
 }
 
+.input-list {
+    color: white;
+    border: none;
+    outline: none;
+    background-color: #2196F3;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+::placeholder {
+    color: white;
+}
+
+.lists {
+    margin-top: 20px;
+    font-size: large;
+    cursor: pointer;
+}
+
