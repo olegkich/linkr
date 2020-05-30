@@ -11,6 +11,10 @@ class Sidebar extends React.Component {
             {
                 name: 'test-item',
                 id: '21312'
+            },
+            {
+                name: 'test-item2',
+                id: '21323112'
             }
         ],
         listInput: ''
@@ -27,24 +31,28 @@ class Sidebar extends React.Component {
         this.setState({
             lists: [...this.state.lists, {
                 name: this.state.listInput,
-                id: shortid
+                id: shortid.generate()
             }],
             listInput: ''
         })
     }
 
+    setListId = (id) => {
+        this.props.setListId(id)
+    }
+
     componentDidUpdate() {
-        localStorage.setItem('lists', JSON.stringify(this.state.lists))
-        console.log(this.state.lists)
+        // localStorage.setItem('lists', (JSON.stringify(this.state.lists)))
     }
 
     componentDidMount() {
-        this.setState({
-            lists: [...JSON.parse(localStorage.getItem('lists'))]
-         })
+        // this.setState({
+        //     lists: JSON.parse(localStorage.getItem('lists'))
+        //  })
     }
 
     render() { 
+        
         return ( 
             <div className='sidebar'>
                 <h1>Linkr</h1>
@@ -58,7 +66,7 @@ class Sidebar extends React.Component {
 
                 <div className='lists'>
                     {this.state.lists.map(listItem => {
-                        return <p key={listItem.id}>{listItem.name}</p>
+                        return <p onClick={() => this.setListId(listItem.id)} key={listItem.id}>{listItem.name}</p>
                     })}
                 </div>
             </div>

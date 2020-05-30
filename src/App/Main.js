@@ -8,8 +8,12 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            links: [],
+            links: [{link: 'test', id: 'test', listId: 'test'}],
+            listId: this.props.listId
         };
+        // this.setState({
+        //     links: this.state.links.filter(linkItem => linkItem.listId === this.props.listId)
+        // })
     }
 
     addLink = link => {
@@ -25,18 +29,20 @@ class Main extends React.Component {
     }
 
     componentDidUpdate() {
+        console.log(this.state.links, 'cdu')
         localStorage.setItem('links', JSON.stringify(this.state.links))
     }
 
     componentDidMount() {
         this.setState({
-            links: [...JSON.parse(localStorage.getItem('links'))]
+            links: JSON.parse(localStorage.getItem('links'))
          })
-         console.log(this.state.links)
+         console.log(this.state.links, 'cdm')
     }
 
+    //WARNING! To be deprecated in React v17. Use componentDidUpdate instead.
+
     render() {
-    
         return ( 
             <div className='main'>
                 <div className='container'>
@@ -44,6 +50,7 @@ class Main extends React.Component {
                     <LinkForm listName={this.props.listName} listId={this.props.listId} addLink={this.addLink}/>
 
                     <div className='links'>
+                        {console.log(console.log(this.state.links))}
                         {this.state.links.map(linkItem => (
                             <Link 
                             link={linkItem.link}
