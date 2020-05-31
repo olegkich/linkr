@@ -1,23 +1,21 @@
 import React from 'react';
 
 import shortid from 'shortid';
-import './Sidebar.css';
+import './css/Sidebar.css';
 import Button from 'muicss/lib/react/button';
 import Input from 'muicss/lib/react/input';
 
 class Sidebar extends React.Component {
-    state = { 
-        lists: [
-            {
-                name: 'test-item',
-                id: '21312'
-            },
-            {
-                name: 'test-item2',
-                id: '21323112'
-            }
-        ],
-        listInput: ''
+    constructor(props) {
+        super(props)
+        this.state = { 
+            lists: [],
+            listInput: ''
+        }
+       
+        if(this.state.lists === null) {
+            localStorage.setItem('lists', JSON.stringify(this.state.lists))
+        }
     }
 
     handleInput = e => {
@@ -37,18 +35,18 @@ class Sidebar extends React.Component {
         })
     }
 
-    setListId = (id) => {
-        this.props.setListId(id)
+    setList = (list) => {
+        this.props.setList(list)
     }
 
     componentDidUpdate() {
-        // localStorage.setItem('lists', (JSON.stringify(this.state.lists)))
+        localStorage.setItem('lists', (JSON.stringify(this.state.lists)))
     }
 
     componentDidMount() {
-        // this.setState({
-        //     lists: JSON.parse(localStorage.getItem('lists'))
-        //  })
+        this.setState({
+            lists: JSON.parse(localStorage.getItem('lists'))
+         })
     }
 
     render() { 
@@ -66,7 +64,7 @@ class Sidebar extends React.Component {
 
                 <div className='lists'>
                     {this.state.lists.map(listItem => {
-                        return <p onClick={() => this.setListId(listItem.id)} key={listItem.id}>{listItem.name}</p>
+                        return <p onClick={() => this.setList(listItem)} key={listItem.id}>{listItem.name}</p>
                     })}
                 </div>
             </div>
