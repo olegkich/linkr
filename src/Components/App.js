@@ -17,7 +17,6 @@ class App extends React.Component {
 
       if(this.state.links === null) {
         localStorage.setItem('links', JSON.stringify(this.state.links))
-        console.log('null')
       }
     }
 

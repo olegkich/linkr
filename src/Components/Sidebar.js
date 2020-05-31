@@ -35,6 +35,16 @@ class Sidebar extends React.Component {
         })
     }
 
+    deleteList = (id) => {
+        this.setState({
+            lists: this.state.lists.filter(listItem => listItem.id !== id)
+        })
+        this.props.setList({
+            name: 'none',
+            id: 'home'
+        })
+    }
+
     setList = (list) => {
         this.props.setList(list)
     }
@@ -66,7 +76,12 @@ class Sidebar extends React.Component {
 
                 <div className='lists'>
                     {this.state.lists.map(listItem => {
-                        return <p onClick={() => this.setList(listItem)} key={listItem.id}>{listItem.name}</p>
+                        return (
+                            <div className='list-container'>
+                                <p onClick={() => this.setList(listItem)} key={listItem.id}>{listItem.name}</p>
+                                <p className='delete-list' onClick={() => this.deleteList(listItem.id)}>x</p>
+                            </div>
+                        ) 
                     })}
                 </div>
             </div>

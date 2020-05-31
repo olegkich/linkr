@@ -31,3 +31,12 @@
     cursor: pointer;
 }
 
+.list-container {
+    display: flex;
+}
+
+.delete-list {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
