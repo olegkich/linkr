@@ -8,40 +8,18 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            links: [],
+            links: this.props.links,
             currentList: this.props.list,
-            currentLinks: []
         };
-
-        if(this.state.links === null) {
-            localStorage.setItem('links', JSON.stringify(this.state.links))
-        }
-
     }
 
     addLink = link => {
-        this.setState({
-            links: [...this.state.links, link]
-        })
+       this.props.addLink(link)
     }
 
     deleteLink = id => {
-        this.setState({
-            links: this.state.links.filter(linkItem => linkItem.id !== id)
-        })
+        this.props.deleteLink(id)
     }
-
-    componentDidUpdate() {
-        localStorage.setItem('links', JSON.stringify(this.state.links))
-    }
-
-    componentDidMount() {
-        this.setState({
-            links: JSON.parse(localStorage.getItem('links')),
-         })
-         
-    }
-
 
     render() {
         return ( 
@@ -51,11 +29,11 @@ class Main extends React.Component {
                     <LinkForm listName={this.props.list.name} listId={this.props.list.id} addLink={this.addLink}/>
 
                     <div className='links'>
-                        {this.state.links.map(linkItem => (
+                        {this.props.links.map(linkItem => (
                             <Link 
                             link={linkItem.link}
                             key={linkItem.id}
-                            listId={this.state.currentListId}
+                            listId={this.state.currentList.id}
                             onDelete={() => this.deleteLink(linkItem.id)}/>
                         ))}
                     </div>

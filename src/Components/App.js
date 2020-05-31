@@ -11,9 +11,27 @@ class App extends React.Component {
         list: {
           name: 'main list',
           id: 'main'
-        }
+        },
+        links: []
+      }
+
+      if(this.state.links === null) {
+        localStorage.setItem('links', JSON.stringify(this.state.links))
+        console.log('null')
       }
     }
+
+  addLink = link => {
+      this.setState({
+          links: [...this.state.links, link],
+      })
+  }
+
+  deleteLink = id => {
+      this.setState({
+          links: this.state.links.filter(linkItem => linkItem.id !== id)
+      })
+  }
 
   setList = (list) => {
     this.setState({
@@ -21,11 +39,26 @@ class App extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+      localStorage.setItem('links', JSON.stringify(this.state.links))
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('links') != null) {
+        this.setState({
+          links: JSON.parse(localStorage.getItem('links')),
+        })
+    }
+    
+  }
+
   render() {
     return (
       <div className="App">
           <Sidebar setList={this.setList}/>
-          <Main list={this.state.list}/>
+          <Main deleteLink={this.deleteLink} addLink={this.addLink}
+          links={this.state.links.filter(linkItem => linkItem.listId === this.state.list.id)}
+          list={this.state.list}/>
       </div>
     );
   }

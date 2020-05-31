@@ -44,9 +44,11 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            lists: JSON.parse(localStorage.getItem('lists'))
-         })
+        if (localStorage.getItem('lists') != null) {
+            this.setState({
+                lists: JSON.parse(localStorage.getItem('lists'))
+             })
+        }
     }
 
     render() { 
