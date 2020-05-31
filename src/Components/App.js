@@ -9,8 +9,8 @@ class App extends React.Component {
       super(props);
       this.state = {
         list: {
-          name: 'main list',
-          id: 'main'
+          name: 'none',
+          id: 'home'
         },
         links: []
       }

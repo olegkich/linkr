@@ -37,6 +37,11 @@ class LinkForm extends React.Component {
     }
 
     render() {
+        if (this.props.listId === 'home') {
+            return (
+                <h2>Welcome! add a list or choose an existing one to start using Linkr.</h2>
+            )
+        } else
         return ( 
         <div>
             <Form>
