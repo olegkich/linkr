@@ -11,6 +11,11 @@
     padding: 20px;
 }
 
+.form-add-list {
+    display: flex;
+    position: relative;
+}
+
 .input-list {
     color: white;
     border: none;
@@ -18,7 +23,18 @@
     background-color: #2196F3;
     border-bottom: 1px solid white;
     padding-bottom: 5px;
-    padding-right: 5px;
+    width: 125px;
+}
+
+.btn-add-list {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 ::placeholder {

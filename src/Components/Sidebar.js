@@ -66,11 +66,12 @@ class Sidebar extends React.Component {
         return ( 
             <div className='sidebar'>
                 <h1>Linkr</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className='form-add-list'>
                     <input value={this.state.listInput}
                     onChange={this.handleInput}
                     className='input-list'
                     placeholder='add link-list'/>
+                    <span type='submit' className='btn-add-list'>+</span>
                 </form>
                 
 
