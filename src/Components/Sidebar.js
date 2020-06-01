@@ -71,7 +71,7 @@ class Sidebar extends React.Component {
                     onChange={this.handleInput}
                     className='input-list'
                     placeholder='add link-list'/>
-                    <span type='submit' className='btn-add-list'>+</span>
+                    <span onClick={this.handleSubmit}type='submit' className='btn-add-list'>+</span>
                 </form>
                 
 
